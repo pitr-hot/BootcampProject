@@ -1,5 +1,7 @@
 package cz.pettep.main;
 
+import cz.pettep.Ojects.CSVReader;
+import cz.pettep.Ojects.Customer;
 import cz.pettep.dao.TestRepository;
 import cz.pettep.database.ConnectionFactory;
 import cz.pettep.entity.Test;
@@ -20,6 +22,14 @@ public class Main {
             } catch (SQLException ex) {
                 System.out.println("Chyba při komunikaci s databází");
             }
+
+        List<Customer> customers = CSVReader.readCustomerFromCSV("customer.txt");
+
+        // let's print all the person read from CSV file
+        for (Customer b : customers) {
+            System.out.println(b);
+        }
+
 
     }
 }
