@@ -1,4 +1,4 @@
-package cz.pettep.Ojects;
+package cz.pettep.entity;
 
 import java.util.Date;
 

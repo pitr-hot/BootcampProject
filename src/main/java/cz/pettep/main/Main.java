@@ -1,18 +1,14 @@
 package cz.pettep.main;
 
-import cz.pettep.Ojects.CSVReader;
-import cz.pettep.Ojects.Customer;
-import cz.pettep.dao.TestRepository;
-import cz.pettep.database.ConnectionFactory;
-import cz.pettep.entity.Test;
+import cz.pettep.csv.CSVReader;
+import cz.pettep.entity.Customer;
 
-import java.sql.*;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-            try (Connection conn = new ConnectionFactory().createConnection();) {
+        /* try (Connection conn = new ConnectionFactory().createConnection();) {
 
                 List<Test> list =  TestRepository.getAllTests(conn);
                 for (Test test : list){
@@ -22,14 +18,16 @@ public class Main {
             } catch (SQLException ex) {
                 System.out.println("Chyba při komunikaci s databází");
             }
+*/
+             List<Customer> customers = CSVReader.readCustomerFromCSV("cus");
 
-        List<Customer> customers = CSVReader.readCustomerFromCSV("customer.txt");
+           for (Customer b : customers) {
+               System.out.println(b);
+           }
 
-        // let's print all the person read from CSV file
-        for (Customer b : customers) {
-            System.out.println(b);
+        String[] o = CSVReader.splitCSV("2,\"Rostislav ,ProchĂˇzka\",P,1946-08-13,1979-10-19,558273600");
+        for (int i = 0;i<o.length;i++){
+            System.out.println(o[i]);
         }
-
-
     }
 }
