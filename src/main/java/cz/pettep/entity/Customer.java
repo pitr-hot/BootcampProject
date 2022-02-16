@@ -1,16 +1,16 @@
 package cz.pettep.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Customer {
-    public String CU_OLD_ID;
+    public int CU_OLD_ID;
     public String CU_NAME;
-    public String CU_TYPE;
-    public String CU_ORIGIN_DATE;
-    public String CU_REG_DATE;
-    public String CU_PHONE_NUMBER;
+    public char CU_TYPE;
+    public LocalDate CU_ORIGIN_DATE;
+    public LocalDate CU_REG_DATE;
+    public Integer CU_PHONE_NUMBER;
 
-    public Customer(String CU_OLD_ID, String CU_NAME, String CU_TYPE, String CU_ORIGIN_DATE, String CU_REG_DATE, String CU_PHONE_NUMBER) {
+    public Customer(int CU_OLD_ID, String CU_NAME, char CU_TYPE, LocalDate CU_ORIGIN_DATE, LocalDate CU_REG_DATE, Integer CU_PHONE_NUMBER) {
         this.CU_OLD_ID = CU_OLD_ID;
         this.CU_NAME = CU_NAME;
         this.CU_TYPE = CU_TYPE;
@@ -23,7 +23,7 @@ public class Customer {
     public String toString() {
         return "Customer{" +
                 "CU_OLD_ID=" + CU_OLD_ID +
-                ", CU_NAME='" + CU_NAME +
+                ", CU_NAME=" + CU_NAME +
                 ", CU_TYPE=" + CU_TYPE +
                 ", CU_ORIGIN_DATE=" + CU_ORIGIN_DATE +
                 ", CU_REG_DATE=" + CU_REG_DATE +

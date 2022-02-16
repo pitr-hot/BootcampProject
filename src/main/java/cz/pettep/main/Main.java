@@ -2,7 +2,6 @@ package cz.pettep.main;
 
 import cz.pettep.csv.CSVReader;
 import cz.pettep.entity.Customer;
-
 import java.util.List;
 
 public class Main {
@@ -19,15 +18,13 @@ public class Main {
                 System.out.println("Chyba při komunikaci s databází");
             }
 */
-             List<Customer> customers = CSVReader.readCustomerFromCSV("cus");
+             List<Customer> customers = CSVReader.readCustomerFromCSV("customer");
 
            for (Customer b : customers) {
                System.out.println(b);
            }
 
-        String[] o = CSVReader.splitCSV("2,\"Rostislav ,ProchĂˇzka\",P,1946-08-13,1979-10-19,558273600");
-        for (int i = 0;i<o.length;i++){
-            System.out.println(o[i]);
-        }
+
+
     }
 }
