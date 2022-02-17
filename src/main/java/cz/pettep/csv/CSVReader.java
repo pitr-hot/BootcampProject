@@ -1,6 +1,9 @@
 package cz.pettep.csv;
 
 import cz.pettep.entity.Customer;
+import cz.pettep.entity.Repair;
+import cz.pettep.entity.Vehicle;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -14,10 +17,10 @@ public class CSVReader {
         File pathToFile = new File(System.getProperty("user.home") + File.separator + "BootCamp" + File.separator + "INPUT" + File.separator + "RS_1_Customer_20170201.csv");
         try (BufferedReader br = new BufferedReader(new FileReader(pathToFile))) {
             String[] firstString = br.readLine().split(",");
-            if (firstString[0] != "oldId" && firstString[1] != "name" && firstString[2] != "custType" && firstString[3] != "originDate" && firstString[4] != "custRegDate" && firstString[5] != "phoneNumber" && firstString.length != 6) {
-                System.out.println("Invalid header of CSV document");
-                System.exit(0);
-            }
+  //          if (firstString[0].equals("oldId") || firstString[1].equals("name") || firstString[2].equals("custType") || firstString[3].equals("originDate") || firstString[4].equals("custRegDate") || firstString[5].equals("phoneNumber") || firstString.length != 6) {
+  //              System.out.println("Invalid header of CSV document");
+  //              System.exit(0);
+  //          }
             String line = br.readLine();
             while (line != null) {
                 String[] attributes = splitCSV(line);
@@ -26,8 +29,8 @@ public class CSVReader {
                     System.exit(0);
                 }
                 Customer customer = createCustomer(attributes);
-                for (Customer x : customers){
-                    if (x.CU_OLD_ID ==customer.CU_OLD_ID){
+                for (Customer x : customers) {
+                    if (x.CU_OLD_ID == customer.CU_OLD_ID) {
                         System.out.println("Duplicate value in customer ID!");
                         System.exit(0);
                     }
@@ -41,6 +44,70 @@ public class CSVReader {
         return customers;
     }
 
+    public static List<Vehicle> readVehicleFromCSV(String fileName) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        File pathToFile = new File(System.getProperty("user.home") + File.separator + "BootCamp" + File.separator + "INPUT" + File.separator + "RS_1_Vehicle_20170201.csv");
+        try (BufferedReader br = new BufferedReader(new FileReader(pathToFile))) {
+            String[] firstString = br.readLine().split(",");
+//            if (firstString[0].equals("oldId") || firstString[1].equals("name") || firstString[2].equals("custType") || firstString[3].equals("originDate")  || firstString[4].equals("custRegDate") || firstString[5].equals("phoneNumber") || firstString.length != 6) {
+//                System.out.println("Invalid header of CSV document");
+//                System.exit(0);
+//            }
+            String line = br.readLine();
+            while (line != null) {
+                String[] attributes = splitCSV(line);
+                if (attributes.length != 14) {
+                    System.out.println("Invalid data from " + pathToFile.getName() + "!");
+                    System.exit(0);
+                }
+                Vehicle vehicle = createVehicle(attributes);
+                for (Vehicle x : vehicles) {
+                    if (x.VEH_OLD_ID == vehicle.VEH_OLD_ID) {
+                        System.out.println("Duplicate value in vehicle ID!");
+                        System.exit(0);
+                    }
+                }
+                vehicles.add(vehicle);
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return vehicles;
+    }
+
+    public static List<Repair> readRepairFromCSV(String fileName) {
+        List<Repair> repairs = new ArrayList<>();
+        File pathToFile = new File(System.getProperty("user.home") + File.separator + "BootCamp" + File.separator + "INPUT" + File.separator + "RS_3_RepairItem_20171201.csv");
+        try (BufferedReader br = new BufferedReader(new FileReader(pathToFile))) {
+            String[] firstString = br.readLine().split(",");
+//            if (firstString[0].equals("oldId") || firstString[1].equals("name") || firstString[2].equals("custType") || firstString[3].equals("originDate")  || firstString[4].equals("custRegDate") || firstString[5].equals("phoneNumber") || firstString.length != 6) {
+//                System.out.println("Invalid header of CSV document");
+//                System.exit(0);
+//            }
+            String line = br.readLine();
+            while (line != null) {
+                String[] attributes = splitCSV(line);
+                if (attributes.length != 5) {
+                    System.out.println("Invalid data from " + pathToFile.getName() + "!");
+                    System.exit(0);
+                }
+                Repair repair = createRepair(attributes);
+                for (Repair x : repairs) {
+                    if (x.RE_OLD_ID == repair.RE_OLD_ID) {
+                        System.out.println("Duplicate value in repair ID!");
+                        System.exit(0);
+                    }
+                }
+                repairs.add(repair);
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return repairs;
+    }
+
     private static Customer createCustomer(String[] metadata) {
         int CU_OLD_ID = Integer.parseInt(metadata[0]);
         String CU_NAME = metadata[1];
@@ -51,6 +118,32 @@ public class CSVReader {
         return new Customer(CU_OLD_ID, CU_NAME, CU_TYPE, CU_ORIGIN_DATE, CU_REG_DATE, CU_PHONE_NUMBER);
     }
 
+    private static Vehicle createVehicle(String[] metadata) {
+        int VEH_OLD_ID = Integer.parseInt(metadata[0]);
+        int VEH_CU_ID = Integer.parseInt(metadata[1]);
+        String VEH_VIN = metadata[2];
+        LocalDate VEH_REG_DATE = dateConverter(metadata[3]);
+        String VEH_REG_COUNTRY = metadata[4];
+        String VEH_MANUFACTURER = metadata[5];
+        String VEH_TYPE = metadata[6];
+        String VEH_BODY = metadata[7];
+        String VEH_ENGINE = metadata[8];
+        String VEH_RESTRAINT = metadata[9];
+        String VEH_MODEL = metadata[10];
+        int VEH_YEAR = Integer.parseInt(metadata[11]);
+        String VEH_PLANT = metadata[12];
+        String VEH_SERIAL_NUMBER = metadata[13];
+        return new Vehicle(VEH_OLD_ID, VEH_CU_ID, VEH_VIN, VEH_REG_DATE, VEH_REG_COUNTRY, VEH_MANUFACTURER, VEH_TYPE, VEH_BODY, VEH_ENGINE, VEH_RESTRAINT, VEH_MODEL, VEH_YEAR, VEH_PLANT, VEH_SERIAL_NUMBER);
+    }
+
+    private static Repair createRepair(String[] metadata) {
+        int RE_OLD_ID = Integer.parseInt(metadata[0]);
+        int RE_VEH_OLD_ID = Integer.parseInt(metadata[1]);
+        int RE_DET_ID = Integer.parseInt(metadata[2]);
+        int RE_SHOP_ID = Integer.parseInt(metadata[3]);
+        LocalDate RE_BILL_DATE = dateConverter(metadata[4]);
+        return new Repair(RE_OLD_ID, RE_VEH_OLD_ID, RE_DET_ID, RE_SHOP_ID, RE_BILL_DATE);
+    }
 
     public static String[] splitCSV(String s) {
         int startPosition = 0;
@@ -95,20 +188,18 @@ public class CSVReader {
         return output;
     }
 
-    public static Integer phoneNumberConverter(String s){
-        Integer output=null;
+    public static Integer phoneNumberConverter(String s) {
+        Integer output = null;
         if (s.length() != 9) {
             System.out.println("Invalid phone number!");
             System.exit(0);
         }
-        try{
+        try {
             output = Integer.parseInt(s);
-        }
-
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Invalid phone number!");
             System.exit(0);
         }
-        return  output;
+        return output;
     }
 }

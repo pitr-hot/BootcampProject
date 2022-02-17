@@ -1,5 +1,6 @@
 package cz.pettep.dao;
 
+import cz.pettep.entity.Customer;
 import cz.pettep.entity.Test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,5 +21,9 @@ public class TestRepository {
             }
             return listTest;
         }
+    }
+
+    public static void insertCustomersIntoDatabase (Connection conn, List<Customer> customers){
+
     }
 }

@@ -1,12 +1,12 @@
 package cz.pettep.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Vehicle {
     public int VEH_OLD_ID;
     public int VEH_CU_ID;
     public String VEH_VIN;
-    public Date VEH_REG_DATE;
+    public LocalDate VEH_REG_DATE;
     public String VEH_REG_COUNTRY;
     public String VEH_MANUFACTURER;
     public String VEH_TYPE;
@@ -18,7 +18,7 @@ public class Vehicle {
     public String VEH_PLANT;
     public String VEH_SERIAL_NUMBER;
 
-    public Vehicle(int VEH_OLD_ID, int VEH_CU_ID, String VEH_VIN, Date VEH_REG_DATE, String VEH_REG_COUNTRY, String VEH_MANUFACTURER, String VEH_TYPE, String VEH_BODY, String VEH_ENGINE, String VEH_RESTRAINT, String VEH_MODEL, int VEH_YEAR, String VEH_PLANT, String VEH_SERIAL_NUMBER) {
+    public Vehicle(int VEH_OLD_ID, int VEH_CU_ID, String VEH_VIN, LocalDate VEH_REG_DATE, String VEH_REG_COUNTRY, String VEH_MANUFACTURER, String VEH_TYPE, String VEH_BODY, String VEH_ENGINE, String VEH_RESTRAINT, String VEH_MODEL, int VEH_YEAR, String VEH_PLANT, String VEH_SERIAL_NUMBER) {
         this.VEH_OLD_ID = VEH_OLD_ID;
         this.VEH_CU_ID = VEH_CU_ID;
         this.VEH_VIN = VEH_VIN;
@@ -40,18 +40,18 @@ public class Vehicle {
         return "Vehicle{" +
                 "VEH_OLD_ID=" + VEH_OLD_ID +
                 ", VEH_CU_ID=" + VEH_CU_ID +
-                ", VEH_VIN='" + VEH_VIN + '\'' +
+                ", VEH_VIN=" + VEH_VIN +
                 ", VEH_REG_DATE=" + VEH_REG_DATE +
-                ", VEH_REG_COUNTRY='" + VEH_REG_COUNTRY + '\'' +
-                ", VEH_MANUFACTURER='" + VEH_MANUFACTURER + '\'' +
-                ", VEH_TYPE='" + VEH_TYPE + '\'' +
-                ", VEH_BODY='" + VEH_BODY + '\'' +
-                ", VEH_ENGINE='" + VEH_ENGINE + '\'' +
-                ", VEH_RESTRAINT='" + VEH_RESTRAINT + '\'' +
-                ", VEH_MODEL='" + VEH_MODEL + '\'' +
+                ", VEH_REG_COUNTRY=" + VEH_REG_COUNTRY +
+                ", VEH_MANUFACTURER=" + VEH_MANUFACTURER +
+                ", VEH_TYPE=" + VEH_TYPE +
+                ", VEH_BODY=" + VEH_BODY +
+                ", VEH_ENGINE=" + VEH_ENGINE +
+                ", VEH_RESTRAINT=" + VEH_RESTRAINT +
+                ", VEH_MODEL=" + VEH_MODEL +
                 ", VEH_YEAR=" + VEH_YEAR +
-                ", VEH_PLANT='" + VEH_PLANT + '\'' +
-                ", VEH_SERIAL_NUMBER='" + VEH_SERIAL_NUMBER + '\'' +
+                ", VEH_PLANT=" + VEH_PLANT +
+                ", VEH_SERIAL_NUMBER=" + VEH_SERIAL_NUMBER +
                 '}';
     }
 }
